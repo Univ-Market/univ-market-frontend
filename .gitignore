@@ -17,4 +17,10 @@ psd
 thumb
 sketch
 
+.vscode/
+.idea
+
+# 환경 설정 파일
+.env
+
 # End of https://www.toptal.com/developers/gitignore/api/react
