@@ -1,5 +1,4 @@
-// import api from './api';
-import { api, publicApi } from './api'; // 2025/10/15 수정된 import 방식
+import api from './api';
 
 /**
  * 전체 상품 목록을 가져오는 API
@@ -40,9 +39,8 @@ export const getProductsByCategory = async (categoryId, params = {}) => {
  * @param {number} id - 상품 ID
  * @returns {Promise<Object>} 상품 상세 정보
  */
-// 상품 상세 정보 조회는 인증이 필요 없으므로 publicApi를 사용
-export const getProductById = (id) => {
-  return publicApi.get(`/products/${id}`); // 경로 수정됨
+export const getProductById = async (id) => {
+  return api.get(`/products/${id}`);
 };
 
 /**

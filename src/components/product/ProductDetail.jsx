@@ -54,34 +54,24 @@ const ProductDetail = ({ product, isLoading, error }) => {
   /**
    * 채팅방 생성 및 이동 함수
    */
-const handleChat = async () => {
-  console.log('=== 채팅방 생성 디버깅 ===');
-  console.log('isAuthenticated:', isAuthenticated);
-  console.log('user:', user);
-  console.log('product.id:', product.id);
-  console.log('token:', localStorage.getItem('token'));
+  const handleChat = async () => {
+    // 로그인 상태 확인
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
 
-  if (!isAuthenticated || !user) {
-    alert('로그인이 필요합니다.');
-    navigate('/login');
-    return;
-  }
-
-  try {
-    console.log('API 호출 시작...');
-    const chatRoom = await createChatRoom(product.id);
-    console.log('채팅방 생성 성공:', chatRoom);
-    navigate(`/chat?roomId=${chatRoom.id}`);
-  } catch (error) {
-    console.log('=== 에러 상세 정보 ===');
-    console.log('Error:', error);
-    console.log('Response:', error.response);
-    console.log('Status:', error.response?.status);
-    console.log('Data:', error.response?.data);
-    
-    alert(`채팅방 생성 실패: ${error.response?.data?.message || error.message}`);
-  }
-};
+    try {
+      // 채팅방 생성 API 호출
+      const response = await createChatRoom(product.id);
+      // 생성된 채팅방으로 이동
+      const chatRoom = response.data;
+      navigate(`/chat?roomId=${chatRoom.id}`);
+    } catch (error) {
+      console.error('채팅방 생성 중 오류 발생:', error);
+      alert('채팅방을 생성할 수 없습니다. 다시 시도해주세요.');
+    }
+  };
 
   /**
    * 상품 예약 처리 함수

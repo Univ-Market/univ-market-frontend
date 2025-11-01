@@ -1,5 +1,4 @@
-// import api from './api';
-import { api, publicApi } from './api'; // 2025/10/15 수정된 import 방식
+import api from './api';
 
 /**
  * 사용자의 채팅방 목록을 가져오는 API
