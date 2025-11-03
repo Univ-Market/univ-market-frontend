@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- 배경 -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338ca" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg-gradient)" />
+  
+  <!-- 장식용 원형 -->
+  <circle cx="700" cy="80" r="60" fill="#818cf8" opacity="0.3" />
+  <circle cx="100" cy="320" r="80" fill="#818cf8" opacity="0.3" />
+  
+  <!-- 대학 건물 실루엣 -->
+  <path d="M550 320 L550 200 L600 170 L650 200 L650 320 Z" fill="#c7d2fe" />
+  <path d="M570 320 L570 220 L600 200 L630 220 L630 320 Z" fill="#4f46e5" />
+  <rect x="590" y="320" width="20" height="20" fill="#c7d2fe" />
+  
+  <!-- 왼쪽 부분: 졸업모 -->
+  <path d="M150 200 L250 200 L200 170 Z" fill="#c7d2fe" />
+  <rect x="195" y="170" width="10" height="20" fill="#c7d2fe" />
+  <path d="M150 200 L250 200 L250 220 L150 220 Z" fill="#818cf8" />
+  <ellipse cx="200" cy="220" rx="50" ry="5" fill="#4f46e5" />
+  
+  <!-- 스마트폰 -->
+  <rect x="300" y="160" width="80" height="140" rx="10" fill="#1e293b" />
+  <rect x="305" y="170" width="70" height="110" rx="3" fill="#f9fafb" />
+  <circle cx="340" cy="290" r="8" fill="#e2e8f0" />
+  
+  <!-- 거래 아이콘 (화면 내부) -->
+  <circle cx="340" cy="210" r="20" fill="#fef3c7" />
+  <path d="M330 210 L350 210 M330 205 L335 210 L330 215 M350 205 L345 210 L350 215" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- 책 더미 -->
+  <rect x="420" y="210" width="70" height="50" rx="2" fill="#bfdbfe" />
+  <rect x="425" y="205" width="70" height="50" rx="2" fill="#93c5fd" />
+  <rect x="430" y="200" width="70" height="50" rx="2" fill="#60a5fa" />
+  
+  <!-- 텍스트 "대학마켓" -->
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="45" font-weight="bold" fill="white" text-anchor="middle">대학마켓</text>
+  <!-- <text x="400" y="140" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">대학생을 위한 안전한 중고거래 플랫폼</text> -->
+</svg>

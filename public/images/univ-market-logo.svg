@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+  <!-- 배경 -->
+  <rect width="300" height="100" rx="15" fill="#4f46e5" />
+  
+  <!-- 모든 방향으로 여백이 동일한 로고 -->
+  <g transform="translate(-9, 4.2)">
+    <!-- 학사모 부분 (크기 조정 및 중앙 정렬) -->
+    <g transform="translate(105, 45.8) scale(0.8) translate(-105, -45)">
+      <path d="M75 45 L135 45 L105 25 Z" fill="#c7d2fe" />
+      <rect x="102" y="25" width="6" height="20" fill="#c7d2fe" />
+      <path d="M75 45 L135 45 L135 65 L75 65 Z" fill="#818cf8" />
+      <ellipse cx="105" cy="65" rx="30" ry="5" fill="#4f46e5" />
+    </g>
+    
+    <!-- 텍스트 부분 -->
+    <text x="195" y="57" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">대학마켓</text>
+  </g>
+</svg>

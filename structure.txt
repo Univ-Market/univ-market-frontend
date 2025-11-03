@@ -1,0 +1,48 @@
+React
+
+src/
+├── components/             // 재사용 가능한 컴포넌트
+│   ├── layout/
+│   │   ├── Header.jsx      // 상단 네비게이션바, 검색 기능
+│   │   ├── Footer.jsx      // 페이지 하단 정보 및 링크
+│   │   └── Navigation.jsx  // 카테고리 메뉴 네비게이션
+│   ├── product/
+│   │   ├── ProductList.jsx // 상품 목록 표시 컴포넌트
+│   │   ├── ProductItem.jsx // 개별 상품 아이템 컴포넌트
+│   │   ├── ProductDetail.jsx // 상품 상세 정보 컴포넌트
+│   │   └── ProductForm.jsx // 상품 등록/수정 폼 컴포넌트
+│   ├── user/
+│   │   ├── Profile.jsx     // 사용자 프로필 및 판매 내역
+│   │   ├── Login.jsx       // 로그인 페이지 컴포넌트
+│   │   ├── OAuthCallback.jsx // OAuth 인증 콜백 처리 컴포넌트
+│   │   └── UnivVerification.jsx // 대학교 인증 컴포넌트
+│   ├── chat/
+│   │   ├── ChatRoom.jsx    // 채팅방 내부 대화 컴포넌트
+│   │   ├── ChatList.jsx    // 채팅방 목록 컴포넌트
+│   │   └── ChatMessage.jsx // 개별 채팅 메시지 컴포넌트
+│   └── common/
+│       └── PrivateRoute.jsx // 인증 필요 라우트 보호 컴포넌트
+├── pages/                  // 페이지 컴포넌트
+│   ├── Home.jsx            // 홈페이지
+│   ├── ProductListPage.jsx // 상품 목록/검색 결과 페이지
+│   ├── ProductDetailPage.jsx // 상품 상세 정보 페이지
+│   ├── ProductCreatePage.jsx // 상품 등록 페이지
+│   ├── ChatPage.jsx        // 채팅 페이지(목록 + 채팅방)
+│   └── ProfilePage.jsx     // 사용자 프로필 페이지
+├── services/               // API 서비스
+│   ├── api.js              // 기본 API 클라이언트 설정
+│   ├── productApi.js       // 상품 관련 API 호출
+│   ├── userApi.js          // 사용자 관련 API 호출
+│   ├── authApi.js          // 인증 관련 API 호출
+│   ├── chatApi.js          // 채팅 관련 API 호출
+│   └── uploadApi.js        // 파일 업로드 관련 API 호출
+├── utils/                  // 유틸리티 함수
+│   └── format.js           // 날짜, 가격 등 포맷팅 함수
+├── hooks/                  // 커스텀 훅
+│   ├── useAuth.js          // 인증 관련 커스텀 훅
+│   └── useChat.js          // 채팅 웹소켓 관련 커스텀 훅
+├── context/                // 전역 상태 관리
+│   ├── AuthContext.jsx     // 인증 상태 관리 컨텍스트
+│   └── ChatContext.jsx     // 채팅 상태 관리 컨텍스트
+├── App.jsx                 // 앱 컴포넌트 및 라우팅 설정
+└── index.jsx               // 진입점
