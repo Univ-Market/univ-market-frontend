@@ -82,6 +82,16 @@ export const deleteProduct = async (id) => {
 };
 
 /**
+ * 상품 정보를 업데이트하는 API
+ * @param {number} id - 상품 ID
+ * @param {Object} productData - 업데이트할 상품 데이터
+ * @returns {Promise<Object>} 업데이트된 상품 정보
+ */
+export const updateProduct = async (id, productData) => {
+  return api.put(`/products/${id}`, productData);
+};
+
+/**
  * 현재 사용자의 상품 목록을 가져오는 API
  * @returns {Promise<Array>} 사용자의 상품 목록
  */

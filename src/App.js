@@ -10,6 +10,7 @@ import OAuthCallback from './components/user/OAuthCallback';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductCreatePage from './pages/ProductCreatePage';
+import ProductEditPage from './pages/ProductEditPage'; // Added by Gemini
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/common/PrivateRoute';
@@ -32,6 +33,7 @@ import UnivVerification from './components/user/UnivVerification';
  * - '/products/categories/:categoryId': 카테고리별 상품 목록
  * - '/products/:id': 상품 상세 페이지
  * - '/products/new': 상품 등록 페이지 (인증 필요)
+ * - '/products/edit/:id': 상품 수정 페이지 (인증 필요) // Added by Gemini
  * - '/chat': 채팅 페이지 (인증 필요)
  * - '/my-page': 사용자 프로필 페이지 (인증 필요)
  * - '/verify-university': 대학교 인증 페이지 (인증 필요)
@@ -72,6 +74,16 @@ function App() {
                 element={
                   <PrivateRoute>
                     <ProductCreatePage />
+                  </PrivateRoute>
+                }
+              />
+
+              {/* 상품 수정 페이지 (인증 필요) // Added by Gemini */}
+              <Route
+                path="/products/edit/:id"
+                element={
+                  <PrivateRoute>
+                    <ProductEditPage />
                   </PrivateRoute>
                 }
               />
