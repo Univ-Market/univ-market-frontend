@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatPrice, formatDate } from '../../utils/format';
 import { useAuth } from '../../hooks/useAuth';
-import { reserveProduct, completeTransaction } from '../../services/productApi';
+import { reserveProduct, completeTransaction, deleteProduct } from '../../services/productApi';
 import { createChatRoom } from '../../services/chatApi';
 
 /**
@@ -141,6 +141,24 @@ const handleChat = async () => {
     }
   };
 
+  /**
+   * 상품 삭제 처리 함수
+   */
+  const handleDelete = async () => {
+    if (!window.confirm('정말로 이 상품을 삭제하시겠습니까?')) {
+      return;
+    }
+
+    try {
+      await deleteProduct(product.id);
+      alert('상품이 성공적으로 삭제되었습니다.');
+      navigate('/'); // 삭제 후 홈으로 이동
+    } catch (error) {
+      console.error('상품 삭제 중 오류 발생:', error);
+      alert('상품 삭제에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
   // 판매자 본인 여부 확인
   const isSeller = user && user.id === product.sellerId;
 
@@ -175,8 +193,19 @@ const handleChat = async () => {
         );
       }
       return (
-        <div className="p-4 bg-gray-100 rounded-lg text-center">
-          <p className="font-medium text-gray-700">내가 등록한 상품입니다.</p>
+        <div className="space-y-2">
+          <button
+            onClick={() => navigate(`/products/edit/${product.id}`)}
+            className="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none"
+          >
+            수정
+          </button>
+          <button
+            onClick={handleDelete}
+            className="w-full py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 focus:outline-none"
+          >
+            삭제
+          </button>
         </div>
       );
     }

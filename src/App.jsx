@@ -10,6 +10,7 @@ import OAuthCallback from './components/user/OAuthCallback';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductCreatePage from './pages/ProductCreatePage';
+import ProductEditPage from './pages/ProductEditPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/common/PrivateRoute';
@@ -47,6 +48,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <ProductCreatePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/products/edit/:id"
+                element={
+                  <PrivateRoute>
+                    <ProductEditPage />
                   </PrivateRoute>
                 }
               />
