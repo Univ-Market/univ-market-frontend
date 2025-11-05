@@ -67,11 +67,15 @@ const ProductForm = ({ initialValues, onSubmit, categories = [], submitButtonTex
     try {
         for (const file of newFiles) {
             const presignedData = await getPresignedUrl(file.name, file.type);
-            await fetch(presignedData.uploadUrl, {
+            const response = await fetch(presignedData.uploadUrl, {
                 method: 'PUT',
                 headers: { 'Content-Type': file.type },
                 body: file,
             });
+
+            if (!response.ok) {
+                throw new Error(`S3 업로드 실패: ${response.status} ${response.statusText}`);
+            }
             uploadedUrls.push(presignedData.fileUrl);
         }
         return [...existingUrls, ...uploadedUrls];
