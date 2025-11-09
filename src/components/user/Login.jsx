@@ -47,6 +47,18 @@ const Login = () => {
           />
         </button>
 
+        {/* 구글 로그인 버튼 */}
+        <button
+          onClick={() => window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`}
+          className="w-full flex items-center justify-center py-2"
+        >
+          <img 
+            src="/images/google_login_web_light_sq_SI@2x.png" 
+            alt="구글 로그인" 
+            className="w-full h-auto rounded-lg hover:opacity-80 transition-opacity"
+          />
+        </button>
+
         {/* 약관 안내 */}
         <div className="text-center text-sm text-gray-500 mt-6">
           <p>로그인하면 이용약관 및 개인정보처리 방침에
