@@ -38,15 +38,20 @@ const Login = () => {
         {/* 카카오 로그인 버튼 */}
         <button
           onClick={handleKakaoLogin}
-          className="w-full py-3 bg-yellow-400 hover:bg-yellow-500 text-black font-medium rounded-lg flex items-center justify-center"
+          className="w-full"
         >
-          <img src="/images/kakao_login_large_wide.png" alt="Kakao" className="w-5 h-5 mr-2" />
-          카카오 계정으로 시작하기
+          <img 
+            src="/images/kakao_login_large_wide.png" 
+            alt="카카오 로그인" 
+            className="w-full h-auto rounded-lg hover:opacity-90 transition-opacity"
+          />
         </button>
 
         {/* 약관 안내 */}
         <div className="text-center text-sm text-gray-500 mt-6">
-          <p>로그인하면 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.</p>
+          <p>로그인하면 이용약관 및 개인정보처리 방침에
+            <br></br>
+            동의하는 것으로 간주됩니다.</p>
         </div>
       </div>
     </div>

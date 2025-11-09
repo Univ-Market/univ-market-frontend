@@ -49,6 +49,15 @@ const ProductItem = ({ product }) => {
   const imageUrl =
     product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : defaultImage;
 
+  // onError 핸들러가 무한 루프를 일으키지 않도록 수정
+  const handleImageError = (e) => {
+    // 현재 이미지 src가 이미 defaultImage일 경우, 더 이상 변경하지 않음
+    if (e.target.src.includes(defaultImage)) {
+      return;
+    }
+    e.target.src = defaultImage;
+  };
+
   return (
     <Link to={`/products/${product.id}`} className="block">
       <div className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
@@ -58,9 +67,7 @@ const ProductItem = ({ product }) => {
             src={imageUrl}
             alt={product.title}
             className="w-full h-48 object-cover"
-            onError={(e) => {
-              e.target.src = defaultImage;
-            }} // 이미지 로드 실패시 기본 이미지로 대체
+            onError={handleImageError} // 이미지 로드 실패시 기본 이미지로 대체
           />
           {/* 상품 상태 표시 배지 */}
           <span
