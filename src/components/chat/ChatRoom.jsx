@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { formatDate } from '../../utils/format';
@@ -6,15 +8,7 @@ import { getChatMessages, sendChatMessage } from '../../services/chatApi';
 import { reserveProduct, completeTransaction } from '../../services/productApi';
 import ChatMessage from './ChatMessage';
 
-/**
- * 채팅방 컴포넌트
- * 실시간 메시지 송수신 및 거래 관련 기능을 제공합니다.
- *
- * @param {Object} props - 컴포넌트 props
- * @param {string} props.roomId - 채팅방 ID
- * @param {Object} props.chatRoom - 채팅방 정보
- * @param {Function} props.onRefreshRooms - 채팅방 목록 새로고침 함수
- */
+
 const ChatRoom = ({ roomId, chatRoom, onRefreshRooms }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -31,8 +25,9 @@ const ChatRoom = ({ roomId, chatRoom, onRefreshRooms }) => {
   // DOM 참조
   const messagesEndRef = useRef(null);
   const messageAreaRef = useRef(null);
-  // WebSocket 클라이언트 참조
+  // WebSocket 클라이언트 및 구독 참조
   const stompClientRef = useRef(null);
+  const subscriptionRef = useRef(null);
 
   /**
    * 채팅 메시지 로드 함수
@@ -68,9 +63,6 @@ const ChatRoom = ({ roomId, chatRoom, onRefreshRooms }) => {
     if (!roomId || !user) return;
 
     const connectWebSocket = () => {
-      const SockJS = require('sockjs-client');
-      const Stomp = require('stompjs');
-
       // WebSocket 연결 생성
       const socket = new SockJS(`${process.env.REACT_APP_API_URL}/ws`);
       const client = Stomp.over(socket);
@@ -82,9 +74,15 @@ const ChatRoom = ({ roomId, chatRoom, onRefreshRooms }) => {
         },
         () => {
           // 채팅방 구독 (메시지 수신 시 처리)
-          client.subscribe(`/topic/chat/${roomId}`, (message) => {
+          subscriptionRef.current = client.subscribe(`/topic/chat/${roomId}`, (message) => {
             const receivedMessage = JSON.parse(message.body);
-            setMessages((prev) => [...prev, receivedMessage]);
+            setMessages((prev) => {
+              // 메시지 중복 추가 방지
+              if (prev.some((msg) => msg.id === receivedMessage.id)) {
+                return prev;
+              }
+              return [...prev, receivedMessage];
+            });
           });
         },
         (error) => {
@@ -98,10 +96,15 @@ const ChatRoom = ({ roomId, chatRoom, onRefreshRooms }) => {
 
     connectWebSocket();
 
-    // 컴포넌트 언마운트 시 WebSocket 연결 해제
+    // 컴포넌트 언마운트 시 구독 취소 및 WebSocket 연결 해제
     return () => {
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe();
+        subscriptionRef.current = null;
+      }
       if (stompClientRef.current && stompClientRef.current.connected) {
         stompClientRef.current.disconnect();
+        stompClientRef.current = null;
       }
     };
   }, [roomId, user]);
